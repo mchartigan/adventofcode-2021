@@ -63,18 +63,6 @@ class Line:
         if self.y1 == self.y2:
             return True
         return False
-    
-    def intersections(self):
-        if self.x1 == self.x2:
-            if self.y1 > self.y2:
-                return self.x1, range(self.y2, self.y1+1)
-            else:
-                return self.x1, range(self.y1, self.y2+1)
-        elif self.y1 == self.y2:
-            if self.x1 > self.x2:
-                return range(self.x2, self.x1+1)
-            else:
-                return range(self.x1, self.x2+1)
 
 if __name__ == "__main__":
     with open("input.txt") as file:
