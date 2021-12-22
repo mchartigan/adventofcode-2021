@@ -138,11 +138,10 @@ class Range:
     def volume(self):
         return (self.xmax-self.xmin+1)*(self.ymax-self.ymin+1)*(self.zmax-self.zmin+1)
 
-        
 
 ranges = []
-cmin = -50
-cmax = 50
+on_ranges = []
+on = 0
 
 with open("input.txt") as file:
     temp = [x.strip().split(' ') for x in file.readlines()]
@@ -154,12 +153,6 @@ with open("input.txt") as file:
         zmin, zmax = [int(z) for z in zr.strip('z=').split("..")]
         ranges.append(Range(True if val == 'on' else False, xmin, xmax, ymin, ymax, zmin, zmax))
 
-crange = Range(False, cmin, cmax, cmin, cmax, cmin, cmax)
-core = [[[False for _ in range(cmin,cmax+1)] for _ in range(cmin,cmax+1)] for _ in range(cmin,cmax+1)]
-# print(str(len(core)) + " " + str(len(core[0])) + " " + str(len(core[0][0])))
-
-on_ranges = []
-
 for r in ranges:
     old = deepcopy(on_ranges)
     if r.on:
@@ -170,7 +163,6 @@ for r in ranges:
             on_ranges.extend(diff)
             on_ranges.remove(o)
 
-on = 0
 for o in on_ranges:
     on += o.volume
 
